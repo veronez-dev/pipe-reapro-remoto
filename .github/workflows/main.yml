@@ -1,0 +1,14 @@
+name: Deploy Fake
+on: 
+    workflow_call: 
+        secrets:
+            ambiente:
+                required: true
+                description: "Ambiente que vai ser feito o deploy"
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy no ambiente
+              run: "curl -X POST https://webhook.site/2c5fe285-b947-4750-bb12-029abb381004 -d '{ ambiente: ${{ secrets.AMBIENTE_ENTREGA }}}'"
