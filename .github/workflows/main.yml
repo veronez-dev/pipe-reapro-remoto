@@ -1,9 +1,12 @@
 name: Deploy Fake
 on: 
     workflow_call: 
+    repository_dispatch: 
+        types:
+            - deploy-remoto
 jobs:
     deploy:
         runs-on: ubuntu-latest
         steps:
             - name: Deploy no ambiente
-              run: "curl -X POST https://webhook.site/2c5fe285-b947-4750-bb12-029abb381004 -d '{ ambiente: ${{ secrets.AMBIENTE_ENTREGA }}}'"
+              run: "curl -X POST https://webhook.site/2c5fe285-b947-4750-bb12-029abb381004 -d '{ ambiente: ${{ inputs.ambiente || secrets.AMBIENTE_ENTREGA }}}'"
